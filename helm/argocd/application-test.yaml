@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: deploy-sample-app-test
+  namespace: argocd
+spec:
+  destination:
+    namespace: sample-app-test
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    helm:
+      valueFiles:
+        - "environments/values-test.yaml"
+    path: ./helm/manifest
+    repoURL: https://github.com/FaulhabeJ001/sample-app-deployment
+    targetRevision: master
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
