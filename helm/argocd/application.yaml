@@ -15,15 +15,6 @@ spec:
     path: ./helm/manifest
     repoURL: https://github.com/FaulhabeJ001/sample-app-deployment
     targetRevision: master
-  sync:
-    comparedTo:
-      destination:
-        namespace: test
-        server: https://kubernetes.default.svc
-      source:
-        path: quarkus-subchart/
-        repoURL: https://github.com/christianh814/gitops-examples
-        targetRevision: master
   syncPolicy:
     automated:
       prune: true
