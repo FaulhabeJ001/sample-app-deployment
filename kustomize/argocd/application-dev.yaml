@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: deploy-sample-app-dev
+  namespace: argocd
+spec:
+  destination:
+    namespace: sample-app-dev
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: ./kustomize/manifest/envs/dev
+    repoURL: https://github.com/FaulhabeJ001/sample-app-deployment
+    targetRevision: master
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
